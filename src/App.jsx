@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import Navbar from './components/navbar'
 import './App.css'
 import Feedbackform from './components/feedback'
+import CustomerRating from './components/customerRatings'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
    <Navbar></Navbar> 
+   <CustomerRating></CustomerRating>
    <Feedbackform></Feedbackform>
    </>
   )
