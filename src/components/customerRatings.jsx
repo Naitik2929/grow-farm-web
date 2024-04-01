@@ -1,6 +1,6 @@
 function CustomerRating (){
     return (
-        <div class="lg:p-10 p-6 font-[sans-serif] text-green-700 bg-gray-100">
+        <div class="lg:p-10 p-6 font-[sans-serif] text-green-700 bg-gray-100" id="review">
             <div class="mb-20 text-center">
                 <h2 class="text-3xl font-extrabold">What our happy user say</h2>
             </div>
