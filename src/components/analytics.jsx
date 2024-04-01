@@ -14,7 +14,9 @@ const Analytics = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/post/getnoposts");
+      const response = await fetch(
+        "https://api-grow-farm.vercel.app/api/post/getnoposts"
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch user posts");
       }
@@ -28,7 +30,7 @@ const Analytics = () => {
   const fetchUserData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/users/getnousers"
+        "https://api-grow-farm.vercel.app/api/users/getnousers"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch user posts");
