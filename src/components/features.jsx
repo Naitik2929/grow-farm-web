@@ -2,6 +2,7 @@ import React from "react";
 import { MdAddModerator, MdOutlinePriceChange } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { RiUserFollowFill } from "react-icons/ri";
+import { IoIosApps } from "react-icons/io";
 const Features = () => {
   return (
     <section
@@ -21,7 +22,7 @@ const Features = () => {
         </p>
       </div>
 
-      <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
+      <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-2 lg:grid-cols-3">
         <div className="relative overflow-hidden rounded-lg border bg-white select-none hover:shadow hover:shadow-teal-200 p-2">
           <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
             <img src="/social.png" alt="Feature Image" className="h-12 w-12 " />
@@ -87,6 +88,21 @@ const Features = () => {
               <h3 className="font-bold">Multiple Roles of Users</h3>
               <p className="text-sm text-muted-foreground">
                 Farmer, Doctor, Shopowner, Broker, Other
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden rounded-lg border bg-white select-none hover:shadow hover:shadow-teal-200 p-2">
+          <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+            <IoIosApps
+              className="text-green-700"
+              style={{ width: "48px", height: "48px" }}
+            />
+            <div className="space-y-2">
+              <h3 className="font-bold">Easy-to-Use Interface</h3>
+              <p className="text-sm text-muted-foreground">
+                Enjoy a user-friendly and intuitive interface
               </p>
             </div>
           </div>
