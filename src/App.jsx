@@ -6,7 +6,7 @@ import "./App.css";
 import Feedbackform from "./components/feedback";
 import CustomerRating from "./components/customerRatings";
 import Analytics from "./components/analytics";
-
+import Features from "./components/features";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -14,6 +14,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Analytics></Analytics>
+      <Features></Features>
       <CustomerRating></CustomerRating>
       <Feedbackform></Feedbackform>
     </>
