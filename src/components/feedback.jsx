@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
 
 function Feedbackform() {
@@ -6,11 +7,11 @@ function Feedbackform() {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
 
-    const feedbackSubmit = async () => {
-        
+    const feedbackSubmit = async (e) => {
+        e.preventDefault()
         try {
             const response = await fetch(
-                "http://localhost:3000/api/users/feedback",
+                "https://api-grow-farm.vercel.app/api/users/feedback",
                 {
                     method: "POST",
                     headers: {
@@ -19,17 +20,16 @@ function Feedbackform() {
                     body: JSON.stringify({ name, email, message }),
                 }
             );
+            console.log(response.json());
             if (response.ok) {
-                toast.success("Your Feedback is added Thanks!", {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
+                toast.success("Your Feedback is added Thanks!");
             }
-            else {
-                toast.error("Try again");
+            else{
+                toast.error("try again");
             }
         } catch (error) {
+            toast.error("internal server error");
             console.error("Error during login:", error);
-            toast.error("Internal Server Error Please try again");
         }
     };
     return (

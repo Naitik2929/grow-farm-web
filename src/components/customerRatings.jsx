@@ -18,7 +18,7 @@ function CustomerRating (){
         const fetchReviews = async () => {
           try {
             const response = await fetch(
-              `http://localhost:3000/api/users/feedback`
+              `https://api-grow-farm.vercel.app/api/users/feedback`
             );
             if (response.ok) {
               const data = await response.json();
