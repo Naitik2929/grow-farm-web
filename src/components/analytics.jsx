@@ -2,43 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Pie, Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
+import ReactLoading from "react-loading";
 
 const Analytics = () => {
   const [userData, setUserData] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [userDataLoading, setUserDataLoading] = useState(true);
+  const [userPostsLoading, setUserPostsLoading] = useState(true);
 
   useEffect(() => {
-    fetchUserData();
-    fetchUserPosts();
+    fetchData();
   }, []);
 
-  const fetchUserPosts = async () => {
+  const fetchData = async () => {
     try {
-      const response = await fetch(
-        "https://api-grow-farm.vercel.app/api/post/getnoposts"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch user posts");
-      }
-      const data = await response.json();
-      setUserPosts(data.posts);
-    } catch (error) {
-      console.error("Error fetching user posts:", error);
-    }
-  };
+      const [userDataResponse, userPostsResponse] = await Promise.all([
+        fetch("https://api-grow-farm.vercel.app/api/users/getnousers"),
+        fetch("https://api-grow-farm.vercel.app/api/post/getnoposts"),
+      ]);
 
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch(
-        "https://api-grow-farm.vercel.app/api/users/getnousers"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch user posts");
+      if (!userDataResponse.ok || !userPostsResponse.ok) {
+        throw new Error("Failed to fetch data");
       }
-      const data = await response.json();
-      setUserData(data.users);
+
+      const [userData, userPosts] = await Promise.all([
+        userDataResponse.json(),
+        userPostsResponse.json(),
+      ]);
+
+      setUserData(userData.users);
+      setUserPosts(userPosts.posts);
+      setUserDataLoading(false);
+      setUserPostsLoading(false);
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -245,11 +242,22 @@ const Analytics = () => {
                 className="chart-container"
                 style={{ maxWidth: "300px", margin: "0 auto" }}
               >
-                <Line
-                  data={userCreatedAtAnalysis}
-                  options={createdAtOptions}
-                  className="chart"
-                />
+                {userDataLoading ? (
+                  <div className="text-center">
+                    <ReactLoading
+                      type="spin"
+                      color="gray"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                ) : (
+                  <Line
+                    data={userCreatedAtAnalysis}
+                    options={createdAtOptions}
+                    className="chart"
+                  />
+                )}
               </div>
               <p className="mt-4 text-sm text-center text-gray-400">
                 The chart shows the distribution of user creation dates.
@@ -266,11 +274,22 @@ const Analytics = () => {
                 className="chart-container"
                 style={{ maxWidth: "300px", margin: "0 auto" }}
               >
-                <Line
-                  data={postCreatedAtAnalysis}
-                  options={createdAtOptions}
-                  className="chart"
-                />
+                {userPostsLoading ? (
+                  <div className="text-center">
+                    <ReactLoading
+                      type="spin"
+                      color="gray"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                ) : (
+                  <Line
+                    data={postCreatedAtAnalysis}
+                    options={createdAtOptions}
+                    className="chart"
+                  />
+                )}
               </div>
               <p className="mt-4 text-sm text-center text-gray-400">
                 The chart shows the distribution of post creation dates.
@@ -289,11 +308,22 @@ const Analytics = () => {
                 className="chart-container"
                 style={{ maxWidth: "300px", margin: "0 auto" }}
               >
-                <Pie
-                  data={userDataAnalysis}
-                  options={options}
-                  className="chart"
-                />
+                {userDataLoading ? (
+                  <div className="text-center">
+                    <ReactLoading
+                      type="spin"
+                      color="gray"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                ) : (
+                  <Pie
+                    data={userDataAnalysis}
+                    options={options}
+                    className="chart"
+                  />
+                )}
               </div>
               <p className="mt-4 text-sm text-center text-gray-400">
                 The chart shows the distribution of user roles.
@@ -307,11 +337,22 @@ const Analytics = () => {
                 className="chart-container"
                 style={{ maxWidth: "300px", margin: "0 auto" }}
               >
-                <Pie
-                  data={postDataAnalysis}
-                  options={options}
-                  className="chart"
-                />
+                {userPostsLoading ? (
+                  <div className="text-center">
+                    <ReactLoading
+                      type="spin"
+                      color="gray"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                ) : (
+                  <Pie
+                    data={postDataAnalysis}
+                    options={options}
+                    className="chart"
+                  />
+                )}
               </div>
               <p className="mt-4 text-sm text-center text-gray-400">
                 The chart shows the distribution of post roles.
