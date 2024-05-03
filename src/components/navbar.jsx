@@ -6,6 +6,15 @@ function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  const handleClick = () => {
+    const apkUrl = "/grow-farm.apk";
+    const link = document.createElement("a");
+    link.href = apkUrl;
+    link.download = "grow-farm.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -83,6 +92,7 @@ function Navbar() {
               <li>
                 <a
                   href="#"
+                  onClick={handleClick}
                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-yellow-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   Download App
